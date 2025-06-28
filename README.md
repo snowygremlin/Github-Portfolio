@@ -6,7 +6,7 @@
 
 ## 🖼️ Preview / Screenshots
 
-
+https://github.com/snowygremlin/Github-Portfolio/blob/Python-Flask-Web-application/Development%20Documentation.pdf
 
 ---
 
