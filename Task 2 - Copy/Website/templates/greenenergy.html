@@ -1,0 +1,278 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Rolsa Technologies</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/greenenergy">Green Energy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carboncalculator">Carbon Calculator</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/faq">FAQ</a>
+              </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/solar">Solar Panels</a></li>
+                        <li><a class="dropdown-item" href="/ev">EV Charging</a></li>
+                        <li><a class="dropdown-item" href="/hems">Home Energy Management</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    {% if session.get('user_id') %}
+                        <a class="nav-link" href="/dashboard">dashboard</a>
+                    {% else %}
+                        <a class="nav-link" href="/signup">Login / Signup</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+  
+
+<!-- title Section -->
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+      <div class="col-lg-6 px-0">
+        <h1 class="display-4 fst-italic">All about saving your energy - March 2025</h1>
+        <p class="lead my-3">Green energy is transforming the way we power our homes and businesses in the UK. With rising energy costs and growing environmental concerns, adopting renewable energy solutions is not just a choice—it's a necessity. This post explores practical ways to save money while contributing to a sustainable future.</p>
+        <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
+      </div>
+    </div>
+    <!-- other trending articles Section -->
+    <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary-emphasis">United Kingdom</strong>
+              <h3 class="mb-0">Featured post</h3>
+              <div class="mb-1 text-body-secondary">Nov 12</div>
+              <p class="card-text mb-auto">The UK is leading the charge in renewable energy adoption, with wind and solar power now accounting for over 40% of the electricity mix. By switching to green energy providers, households can reduce their carbon footprint and save money on bills.</p>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <img class="bd-placeholder-img" width="200" height="250" 
+                   src="{{ url_for('static', filename='images/Solar Panel 2.jpg') }}" 
+                   alt="Renewable Energy Thumbnail">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
+              <h3 class="mb-0">Energy Saving Designs</h3>
+              <div class="mb-1 text-body-secondary">Nov 11</div>
+              <p class="mb-auto">Energy-efficient home designs are becoming increasingly popular in the UK. Features like triple-glazed windows, smart thermostats, and LED lighting can significantly reduce energy consumption. A typical household can save up to £356 annually.</p>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <img class="bd-placeholder-img" width="200" height="250" 
+                   src="{{ url_for('static', filename='images/Heat Pump.jpg') }}" 
+                   alt="Energy Efficient Home Thumbnail">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+    <div class="row g-5">
+      <div class="col-md-8">
+        <h3 class="pb-4 mb-4 fst-italic border-bottom">
+          From the Firehose
+        </h3>
+  
+        <article class="blog-post">
+          <h2 class="display-5 link-body-emphasis mb-1">Green energy</h2>
+          <p class="blog-post-meta">January 1, 2025 by <a href="#">Mark</a></p>
+  
+          <p>Green energy is the future, and the UK is at the forefront of this revolution. From wind farms off the coast of Scotland to solar arrays in the South, renewable energy is reshaping the landscape.</p>
+          <hr>
+          <p>By adopting energy-saving habits—like turning off appliances on standby and using washing machines at 30°C—households can save hundreds of pounds annually.</p>
+          <h2>Forewords</h2>
+          <p>A quote from secretary of energy:</p>
+          <blockquote class="blockquote">
+            <p>"Switching to renewable energy is not just an environmental choice—it's an economic one. The savings are real, and the impact is profound."</p>
+          </blockquote>
+          <p>Stacy Miller, Secretary of energy has been the head of the green energy revolution in the uk for the past 3 years, helping bring this country to a cleaner standard.</p>
+          <h3>What are some quick solutions?</h3>
+          <p>Heres a list of a few of our favourite methods of saving energy while still not breaking the bank and can be done easily at home.</p>
+          <ul>
+            <li>Use smart meters to monitor and optimize energy usage.</li>
+            <li>Install LED bulbs as a replacement to any filament bulbs</li>
+            <li>Refresh window sealment</li>
+          </ul>
+          <p>And here are some more methods, which cost more to do but yield greater results.</p>
+          <ol>
+            <li>Replace old appliances with energy-efficient models.</li>
+            <li>Installing an air based heat pump.</li>
+            <li>Install solar panels to generate clean energy and save money.</li>
+          </ol>
+        </article>
+        <!-- blog section -->
+        <article class="blog-post">
+          <h2 class="display-5 link-body-emphasis mb-1">UK Government clean power 2030.</h2>
+          <p class="blog-post-meta">December 23, 2024 by <a href="#">Jacob</a></p>
+  
+          <p>The UK government’s Clean Power 2030 Action Plan aims to deliver 100% zero-carbon electricity by 2035. This ambitious goal is supported by investments in wind, solar, and bioenergy projects. Homeowners can contribute by adopting renewable energy solutions and reducing energy waste.</p>
+          <br>
+          <p>Some forewords from the secretary of state:</p>
+          <blockquote>
+            <p>We will <strong>usher</strong> in a new era of clean electricity for our country, with our plan to deliver the most ambitious reforms to our energy system ingenerations. </p>
+          </blockquote>
+          <p>by sprinting to clean, homegrown energy, we can take back control from the dictators and the petrostates. That is why the Prime Minister has put delivering clean power by 2030 at the heart of 1 of his 5 missions and Plan for Change.</p>
+          <p>The age of clean electricity is about harnessing the power of Britain’s natural resources so we can protect working people from the ravages of global energy markets. This plan will provide the foundation for the UK to build an energy system that can bring down bills for households and businesses for good. And it is also about creating the sort of country that we know people want to see - reindustrialising our heartlands with good jobs and tackling the climate crisis.</p>
+        </article>
+  
+        <article class="blog-post">
+          <h2 class="display-5 link-body-emphasis mb-1">Government Grants</h2>
+          <p class="blog-post-meta">December 14, 2024 by <a href="#">Chris</a></p>
+  
+          <p>Heat pumps are gaining popularity in the UK as an efficient way to heat homes. They use renewable energy to provide warmth, reducing reliance on gas boilers. Combined with smart thermostats, heat pumps can cut heating costs by up to 25%.</p>
+            <br>
+            <p>Heat pumps are 3 times more energy efficient than traditional gas boilers, meaning they will substantially reduce the carbon footprint of your home. Because they run on electricity, there’s also potential to make significant bill savings by using smart tariffs with cheaper off-peak rates.</p>
+          <p>The government offers a £7,500 grant towards installing a heat pump across England and Wales through the Boiler Upgrade Scheme.
+
+            Make your home smarter, greener, and more energy efficient.</p>
+        </article>
+
+        <br>
+      </div>
+      <!-- more sections -->
+      <div class="col-md-4">
+        <div class="position-sticky" style="top: 2rem;">
+          <div class="p-4 mb-3 bg-body-tertiary rounded">
+            <h4 class="fst-italic">About</h4>
+            <p class="mb-0">Green energy is more than a trend—it's a movement. This blog is dedicated to exploring the latest innovations in renewable energy and providing practical tips for saving money while protecting the planet.</p>
+          </div>
+  
+          <div>
+            <h4 class="fst-italic">Recent posts</h4>
+            <ul class="list-unstyled">
+              <li>
+                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                  <img class="bd-placeholder-img" width="100%" height="96" 
+                       src="{{ url_for('static', filename='images/Solar Panel 3.jpg') }}" 
+                       alt="Learn how solar panels can save you money and reduce your carbon footprint.">
+                  <div class="col-lg-8">
+                    <h6 class="mb-0">Learn how solar panels can save you money and reduce your carbon footprint.</h6>
+                    <small class="text-body-secondary">January 15, 2025</small>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                  <img class="bd-placeholder-img" width="100%" height="96" 
+                       src="{{ url_for('static', filename='images/EV car.jpg') }}" 
+                       alt="Discover the benefits of energy-efficient home designs.">
+                  <div class="col-lg-8">
+                    <h6 class="mb-0">Discover the benefits of energy-efficient home designs.</h6>
+                    <small class="text-body-secondary">January 14, 2025</small>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                  <img class="bd-placeholder-img" width="100%" height="96" 
+                       src="{{ url_for('static', filename='images/Windmill 2.jpg') }}" 
+                       alt="Explore the UK’s journey toward a net-zero future.">
+                  <div class="col-lg-8">
+                    <h6 class="mb-0">Explore the UK’s journey toward a net-zero future.</h6>
+                    <small class="text-body-secondary">January 13, 2025</small>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- previous articles -->
+          <div class="p-4">
+            <h4 class="fst-italic">Archives</h4>
+            <ol class="list-unstyled mb-0">
+              <li><a href="#">March 2021</a></li>
+              <li><a href="#">February 2021</a></li>
+              <li><a href="#">January 2021</a></li>
+              <li><a href="#">December 2020</a></li>
+              <li><a href="#">November 2020</a></li>
+              <li><a href="#">October 2020</a></li>
+              <li><a href="#">September 2020</a></li>
+              <li><a href="#">August 2020</a></li>
+              <li><a href="#">July 2020</a></li>
+              <li><a href="#">June 2020</a></li>
+              <li><a href="#">May 2020</a></li>
+              <li><a href="#">April 2020</a></li>
+            </ol>
+          </div>
+  
+
+        </div>
+      </div>
+    </div>
+  
+  </main>
+
+<footer class="bg-dark text-light py-5">
+  <div class="container">
+      <div class="row">
+          <!-- About Section -->
+          <div class="col-md-3">
+              <h5>About Rolsa</h5>
+              <p>Local leaders in green energy to create sustainable energy solutions for a greener tomorrow.</p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="col-md-3">
+              <h5>FAQ</h5>
+              <ul class="list-unstyled">
+                  <li><a href="#" class="text-light">How much can I save?</a></li>
+                  <li><a href="#" class="text-light">Installation process</a></li>
+                  <li><a href="#" class="text-light">Maintenance services</a></li>
+                  <li><a href="#" class="text-light">Warranty information</a></li>
+              </ul>
+          </div>
+
+          <!-- Contact Section -->
+          <div class="col-md-3">
+              <h5>Contact</h5>
+              <ul class="list-unstyled">
+                  <li>1-800-ROLSA</li>
+                  <li>info@rolsa.com</li>
+              </ul>
+          </div>
+
+          <!-- Social Media Section -->
+          <div class="col-md-3">
+              <h5>Follow Us</h5>
+              <ul class="list-unstyled">
+                  <li><a href="#" class="text-light"><i class="bi bi-instagram"></i> Instagram</a></li>
+                  <li><a href="#" class="text-light"><i class="bi bi-twitter"></i> Twitter</a></li>
+                  <li><a href="#" class="text-light"><i class="bi bi-linkedin"></i> LinkedIn</a></li>
+                  <li><a href="#" class="text-light"><i class="bi bi-facebook"></i> Facebook</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</footer>
+
+</body>
+</html>

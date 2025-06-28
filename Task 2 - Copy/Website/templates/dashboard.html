@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+    <title>Dashboard</title>
+
+</head>
+
+<body>
+    <style>
+        #energyChart {
+            width: 100%; /* Takes up the full width of its container */
+            height: auto; /* Adjusts height dynamically */
+            margin-top: 40px; /* Space between preceding elements */
+        }
+        .content-wrapper {
+            margin-left: 10%px;
+            margin-right: 10%px;
+        }
+    </style>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Rolsa Technologies</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/greenenergy">Green Energy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carboncalculator">Carbon Calculator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/faq">FAQ</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/solar">Solar Panels</a></li>
+                        <li><a class="dropdown-item" href="/ev">EV Charging</a></li>
+                        <li><a class="dropdown-item" href="/hems">Home Energy Management</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    {% if session.get('user_id') %}
+                        <a class="nav-link active" aria-current="page" href="/dashboard">dashboard</a>
+                    {% else %}
+                        <a class="nav-link" href="/signup">Login / Signup</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    
+<div class="container mt-4 content-wrapper">
+    <!-- User Account Details -->
+    <div class="mb-4">
+        <h1>Welcome, {{ user.first_name }} {{ user.last_name }}</h1>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+
+    <!-- Consultations Section -->
+    <h2>My Consultations</h2>
+    {% if consultations %}
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consultation in consultations %}
+                <tr>
+                    <td>{{ consultation.consultation_type }}</td>
+                    <td>{{ consultation.booking_date.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ consultation.status }}</td>
+                    <td>
+                        <a href="/cancel_consultation/{{ consultation.consultation_id }}" class="btn btn-danger btn-sm">Cancel</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No consultations booked yet.</p>
+    {% endif %}
+</div>
+
+    <!-- Owned Products -->
+    <h3>Owned Products:</h3>
+    <ul>
+        {% for product in owned_products %}
+            <li>{{ product.product_type }} - Purchased on {{ product.purchase_date.strftime('%Y-%m-%d') }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <!-- Form for Adding Products -->
+    <h2>Add Owned Products</h2>
+    <form action="/dashboard" method="POST">
+        <div class="mb-3">
+            <label for="product_type" class="form-label">Product Type</label>
+            <select class="form-select" id="product_type" name="product_type" required>
+                <option value="Solar Panels">Solar Panels</option>
+                <option value="HEMS">HEMS</option>
+                <option value="EV Charge Station">EV Charge Station</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="purchase_date" class="form-label">Date of Purchase</label>
+            <input type="date" class="form-control" id="purchase_date" name="purchase_date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+
+    <h2>Energy Data Visualization</h2>
+    <p class="text-danger">{{ message }}</p>
+    <form action="/dashboard" method="GET">
+        <div class="mb-3">
+            <label for="time_period">Select Time Period:</label>
+            <select class="form-select" id="time_period" name="time_period" required>
+                <option value="" disabled selected>Select Timeframe</option>
+                <option value="day" {% if time_period == 'day' %}selected{% endif %}>Day</option>
+                <option value="week" {% if time_period == 'week' %}selected{% endif %}>Week</option>
+                <option value="month" {% if time_period == 'month' %}selected{% endif %}>Month</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="product">Select Product:</label>
+            <select class="form-select" id="product" name="product" required>
+                <option value="" disabled selected>Select Product</option>
+                {% for product in user.owned_products or [] %}
+                    <option value="{{ product.product_type }}" {% if product.product_type == selected_product %}selected{% endif %}>
+                        {{ product.product_type }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">View</button>
+    </form>
+
+    <!-- Visualization -->
+    <div id="energyChart" style="width:100%; height:500px; margin-top: 40px;"></div>
+</div>
+
+<script>
+    const labels = JSON.parse('{{ labels|tojson|default([]) }}');
+    const generatedEnergy = JSON.parse('{{ generated_energy|tojson|default([]) }}');
+    const usedEnergy = JSON.parse('{{ used_energy|tojson|default([]) }}');
+</script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+
+</body>
+</html>
