@@ -6,7 +6,7 @@
 
 ## 🖼️ Preview / Screenshots
 
-...
+https://imgur.com/a/6TSP3J4
 
 ---
 
