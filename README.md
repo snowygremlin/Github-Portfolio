@@ -1,4 +1,4 @@
-# 📌 Project Title
+# 📌 Angular wearher app
 
 > Angular weather app with use of API
 
@@ -10,11 +10,6 @@ https://imgur.com/a/6TSP3J4
 
 ---
 
-## 🌐 Live Demo
-
-Soon to come
-
----
 
 ## 📖 Description
 
