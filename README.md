@@ -46,12 +46,6 @@ Here are a few things I've worked on:
 
 > *More projects coming soon!*
 
----
-
-## 🎓 Education
-**T-Level: Digital Production, Design and Development**  
-2023 – Present*  
-Predicted: Merit  
 
 ---
 
