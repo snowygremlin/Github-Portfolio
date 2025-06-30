@@ -15,6 +15,9 @@ I'm a passionate **Software Engineer**, I'm enthusiastic about full-stack web de
 >Flask web application
 https://github.com/snowygremlin/Github-Portfolio/tree/Python-Flask-Web-application
 
+>Angular weather app
+https://github.com/snowygremlin/Github-Portfolio/blob/Angular-Weather-App/README.md
+
 ---
 
 ## 🛠️ Languages & Technologies
